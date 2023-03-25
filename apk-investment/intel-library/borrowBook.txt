@@ -1,0 +1,305 @@
+.method public borrowBook(Landroid/view/View;)V
+    .registers 5
+
+    .line 328
+    sget-object p1, Lcom/lotaai/bookcase/config/ResourceConfig$ActionType;->BORROW_BOOK:Lcom/lotaai/bookcase/config/ResourceConfig$ActionType;
+
+    invoke-virtual {p1}, Lcom/lotaai/bookcase/config/ResourceConfig$ActionType;->ordinal()I
+
+    move-result p1
+
+    iput p1, p0, Lcom/lotaai/bookcase/MainActivity;->windowHandler:I
+
+    .line 330
+    sget-object p1, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->QR:Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;
+
+    invoke-virtual {p1}, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->ordinal()I
+
+    move-result p1
+
+    .line 331
+    invoke-static {}, Lcom/lotaai/bookcase/comm/WebSettingConfig;->getInstance()Lcom/lotaai/bookcase/comm/WebSettingConfig;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lcom/lotaai/bookcase/comm/WebSettingConfig;->isCheckQr()Z
+
+    move-result v0
+
+    const/4 v1, 0x1
+
+    if-eqz v0, :cond_21
+
+    .line 333
+    sget-object p1, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->QR:Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;
+
+    invoke-virtual {p1}, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->ordinal()I
+
+    move-result p1
+
+    const/4 v0, 0x1
+
+    goto :goto_22
+
+    :cond_21
+    const/4 v0, 0x0
+
+    .line 335
+    :goto_22
+    invoke-static {}, Lcom/lotaai/bookcase/comm/WebSettingConfig;->getInstance()Lcom/lotaai/bookcase/comm/WebSettingConfig;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Lcom/lotaai/bookcase/comm/WebSettingConfig;->isCheckIC()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_34
+
+    add-int/lit8 v0, v0, 0x1
+
+    .line 337
+    sget-object p1, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->IC:Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;
+
+    invoke-virtual {p1}, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->ordinal()I
+
+    move-result p1
+
+    .line 339
+    :cond_34
+    invoke-static {}, Lcom/lotaai/bookcase/comm/WebSettingConfig;->getInstance()Lcom/lotaai/bookcase/comm/WebSettingConfig;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Lcom/lotaai/bookcase/comm/WebSettingConfig;->isCheckCard()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_46
+
+    add-int/lit8 v0, v0, 0x1
+
+    .line 341
+    sget-object p1, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->SFZ:Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;
+
+    invoke-virtual {p1}, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->ordinal()I
+
+    move-result p1
+
+    .line 343
+    :cond_46
+    invoke-static {}, Lcom/lotaai/bookcase/comm/WebSettingConfig;->getInstance()Lcom/lotaai/bookcase/comm/WebSettingConfig;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Lcom/lotaai/bookcase/comm/WebSettingConfig;->isCheckFace()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_58
+
+    add-int/lit8 v0, v0, 0x1
+
+    .line 345
+    sget-object p1, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->FACE:Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;
+
+    invoke-virtual {p1}, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->ordinal()I
+
+    move-result p1
+
+    :cond_58
+    if-ne v0, v1, :cond_c2
+
+    .line 348
+    sget-object v0, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->QR:Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;
+
+    invoke-virtual {v0}, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->ordinal()I
+
+    move-result v0
+
+    if-eq p1, v0, :cond_a1
+
+    sget-object v0, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->IC:Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;
+
+    invoke-virtual {v0}, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->ordinal()I
+
+    move-result v0
+
+    if-eq p1, v0, :cond_a1
+
+    sget-object v0, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->SFZ:Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;
+
+    invoke-virtual {v0}, Lcom/lotaai/bookcase/config/ResourceConfig$AuthType;->ordinal()I
+
+    move-result v0
+
+    if-ne p1, v0, :cond_73
+
+    goto :goto_a1
+
+    .line 356
+    :cond_73
+    invoke-static {}, Lcom/lotaai/face/FaceSDKManager;->getInstance()Lcom/lotaai/face/FaceSDKManager;
+
+    move-result-object p1
+
+    iget p1, p1, Lcom/lotaai/face/FaceSDKManager;->initStatus:I
+
+    if-nez p1, :cond_97
+
+    .line 357
+    new-instance p1, Landroid/content/Intent;
+
+    invoke-direct {p1}, Landroid/content/Intent;-><init>()V
+
+    const-string v0, "windowHandler"
+
+    .line 358
+    iget v1, p0, Lcom/lotaai/bookcase/MainActivity;->windowHandler:I
+
+    invoke-virtual {p1, v0, v1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
+
+    const-string v0, "from"
+
+    const-string v1, "main"
+
+    .line 359
+    invoke-virtual {p1, v0, v1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
+
+    .line 360
+    const-class v0, Lcom/lotaai/bookcase/FaceCheckAuthActivity;
+
+    invoke-virtual {p1, p0, v0}, Landroid/content/Intent;->setClass(Landroid/content/Context;Ljava/lang/Class;)Landroid/content/Intent;
+
+    .line 361
+    invoke-virtual {p0, p1}, Lcom/lotaai/bookcase/MainActivity;->startActivity(Landroid/content/Intent;)V
+
+    goto :goto_c1
+
+    :cond_97
+    const-string p1, "正在加载人脸数据请稍后，请稍后再试"
+
+    .line 363
+    invoke-static {p0, p1, v1}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Landroid/widget/Toast;->show()V
+
+    return-void
+
+    .line 349
+    :cond_a1
+    :goto_a1
+    new-instance v0, Landroid/content/Intent;
+
+    invoke-direct {v0}, Landroid/content/Intent;-><init>()V
+
+    const-string v1, "authtype"
+
+    .line 350
+    invoke-virtual {v0, v1, p1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
+
+    const-string p1, "windowHandler"
+
+    .line 351
+    iget v1, p0, Lcom/lotaai/bookcase/MainActivity;->windowHandler:I
+
+    invoke-virtual {v0, p1, v1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
+
+    const-string p1, "from"
+
+    const-string v1, "main"
+
+    .line 352
+    invoke-virtual {v0, p1, v1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
+
+    .line 353
+    const-class p1, Lcom/lotaai/bookcase/AuthActivity;
+
+    invoke-virtual {v0, p0, p1}, Landroid/content/Intent;->setClass(Landroid/content/Context;Ljava/lang/Class;)Landroid/content/Intent;
+
+    .line 354
+    invoke-virtual {p0, v0}, Lcom/lotaai/bookcase/MainActivity;->startActivity(Landroid/content/Intent;)V
+
+    :goto_c1
+    return-void
+
+    .line 370
+    :cond_c2
+    new-instance p1, Lcom/lotaai/bookcase/view/AuthDialog$Builder;
+
+    invoke-direct {p1, p0}, Lcom/lotaai/bookcase/view/AuthDialog$Builder;-><init>(Landroid/content/Context;)V
+
+    const-string v0, "请选择身份认证的方式"
+
+    .line 371
+    invoke-virtual {p1, v0}, Lcom/lotaai/bookcase/view/AuthDialog$Builder;->setTitle(Ljava/lang/String;)Lcom/lotaai/bookcase/view/AuthDialog$Builder;
+
+    move-result-object p1
+
+    const v0, 0x7f0c0008
+
+    new-instance v1, Lcom/lotaai/bookcase/MainActivity$14;
+
+    invoke-direct {v1, p0}, Lcom/lotaai/bookcase/MainActivity$14;-><init>(Lcom/lotaai/bookcase/MainActivity;)V
+
+    .line 372
+    invoke-virtual {p1, v0, v1}, Lcom/lotaai/bookcase/view/AuthDialog$Builder;->setIc(ILandroid/view/View$OnClickListener;)Lcom/lotaai/bookcase/view/AuthDialog$Builder;
+
+    move-result-object p1
+
+    const v0, 0x7f0c0009
+
+    new-instance v1, Lcom/lotaai/bookcase/MainActivity$13;
+
+    invoke-direct {v1, p0}, Lcom/lotaai/bookcase/MainActivity$13;-><init>(Lcom/lotaai/bookcase/MainActivity;)V
+
+    .line 383
+    invoke-virtual {p1, v0, v1}, Lcom/lotaai/bookcase/view/AuthDialog$Builder;->setSfz(ILandroid/view/View$OnClickListener;)Lcom/lotaai/bookcase/view/AuthDialog$Builder;
+
+    move-result-object p1
+
+    const v0, 0x7f0c0030
+
+    new-instance v1, Lcom/lotaai/bookcase/MainActivity$12;
+
+    invoke-direct {v1, p0}, Lcom/lotaai/bookcase/MainActivity$12;-><init>(Lcom/lotaai/bookcase/MainActivity;)V
+
+    .line 394
+    invoke-virtual {p1, v0, v1}, Lcom/lotaai/bookcase/view/AuthDialog$Builder;->setFace(ILandroid/view/View$OnClickListener;)Lcom/lotaai/bookcase/view/AuthDialog$Builder;
+
+    move-result-object p1
+
+    const v0, 0x7f0c0007
+
+    new-instance v1, Lcom/lotaai/bookcase/MainActivity$11;
+
+    invoke-direct {v1, p0}, Lcom/lotaai/bookcase/MainActivity$11;-><init>(Lcom/lotaai/bookcase/MainActivity;)V
+
+    .line 409
+    invoke-virtual {p1, v0, v1}, Lcom/lotaai/bookcase/view/AuthDialog$Builder;->setQrCode(ILandroid/view/View$OnClickListener;)Lcom/lotaai/bookcase/view/AuthDialog$Builder;
+
+    move-result-object p1
+
+    const-string v0, "取消"
+
+    new-instance v1, Lcom/lotaai/bookcase/-$$Lambda$MainActivity$Ilc8cXjgtx4z4e4pEhay1AFaNP8;
+
+    invoke-direct {v1, p0}, Lcom/lotaai/bookcase/-$$Lambda$MainActivity$Ilc8cXjgtx4z4e4pEhay1AFaNP8;-><init>(Lcom/lotaai/bookcase/MainActivity;)V
+
+    .line 420
+    invoke-virtual {p1, v0, v1}, Lcom/lotaai/bookcase/view/AuthDialog$Builder;->setButton(Ljava/lang/String;Landroid/view/View$OnClickListener;)Lcom/lotaai/bookcase/view/AuthDialog$Builder;
+
+    move-result-object p1
+
+    .line 421
+    invoke-virtual {p1}, Lcom/lotaai/bookcase/view/AuthDialog$Builder;->create()Lcom/lotaai/bookcase/view/AuthDialog;
+
+    move-result-object p1
+
+    .line 422
+    invoke-virtual {p1}, Lcom/lotaai/bookcase/view/AuthDialog;->show()V
+
+    return-void
+.end method
